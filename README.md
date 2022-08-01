@@ -1,2 +1,2 @@
-# rise_algorithm
+# RISE algorithm
 Regularized Screening Interaction Estimator
