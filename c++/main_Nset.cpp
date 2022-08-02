@@ -3,6 +3,7 @@
 #include <fstream>
 #include <map>
 #include <bitset>
+#include <sstream>
 
 using namespace std;
 
@@ -12,20 +13,21 @@ using namespace std;
 using namespace Eigen;
 using namespace LBFGSpp;
 
-const unsigned int n = 60;
-const string fname = "test_data_n60_N100.dat";
+const unsigned int n = 5;
+const unsigned int N = 10000;
+stringstream fname_base;
 
 // function declarations
-map<uint64_t, unsigned int> read_data(unsigned int *N);
+map<uint64_t, unsigned int> read_data();
 map<uint64_t, double> get_pdata(map<uint64_t, unsigned int> &Nset, unsigned int N);
 map<uint64_t, double> optimize(map<uint64_t, double> pdata);
 void write_jij(map<uint64_t, double> jij);
 
 int main() {
 
-	unsigned int N = 0;
+	fname_base << "../data/test_data_n" << n << "_N" << N;
 
-	map<uint64_t, unsigned int> Nset = read_data(&N);
+	map<uint64_t, unsigned int> Nset = read_data();
 	map<uint64_t, double> pdata = get_pdata(Nset, N);
 	map<uint64_t, double> jij = optimize(pdata);
 	write_jij(jij);
@@ -34,7 +36,7 @@ int main() {
 
 }
 
-map<uint64_t, unsigned int> read_data(unsigned int *N) {
+map<uint64_t, unsigned int> read_data() {
 
 	cout << "reading data..." << endl;
 
@@ -43,6 +45,9 @@ map<uint64_t, unsigned int> read_data(unsigned int *N) {
 
 	map<uint64_t, unsigned int> Nset;
 
+	string fname = fname_base.str() + ".dat";
+
+	cout << fname << endl;
 	ifstream myfile(fname);
 
 	while (getline(myfile, line)) {
@@ -50,7 +55,7 @@ map<uint64_t, unsigned int> read_data(unsigned int *N) {
 		subline = line.substr(0,n);
 		state = bitset<n>(subline).to_ulong();
 		Nset[state] += 1;
-		(*N)++;
+
 	}
 
 	myfile.close();
@@ -79,7 +84,9 @@ void write_jij(map<uint64_t, double> jij) {
 
 	ofstream myfile;
 
-	myfile.open("test_data_n60_N100_jij_fit.dat");
+	string fname = fname_base.str() + "_jij_fit.dat";
+
+	myfile.open(fname);
 
 	for (it = jij.begin(); it != jij.end(); it++) {
 
