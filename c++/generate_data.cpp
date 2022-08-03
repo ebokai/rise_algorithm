@@ -10,8 +10,8 @@
 
 using namespace std;
 
-const int n = 5;
-const int N = 10000;
+const int n = 60;
+const int N = 1000000;
 
 stringstream fname_base;
 
@@ -68,6 +68,7 @@ void write_jij(vector<vector<double>> jij) {
 
 	myfile.open(fname);
 
+	// convert jij to map to ensure same ordering in output files
 
 	for (int i = 0; i < n; i++) {
 		for (int j = i + 1; j < n; j++) {

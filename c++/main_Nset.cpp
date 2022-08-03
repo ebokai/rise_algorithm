@@ -13,15 +13,15 @@ using namespace std;
 using namespace Eigen;
 using namespace LBFGSpp;
 
-const unsigned int n = 5;
-const unsigned int N = 10000;
+const unsigned int n = 60;
+const unsigned int N = 1000000;
 stringstream fname_base;
 
 // function declarations
 map<uint64_t, unsigned int> read_data();
 map<uint64_t, double> get_pdata(map<uint64_t, unsigned int> &Nset, unsigned int N);
-map<uint64_t, double> optimize(map<uint64_t, double> pdata);
-void write_jij(map<uint64_t, double> jij);
+map<uint64_t, double> optimize(map<uint64_t, double> &pdata);
+void write_jij(map<uint64_t, double> &jij);
 
 int main() {
 
@@ -78,7 +78,7 @@ map<uint64_t, double> get_pdata(map<uint64_t, unsigned int> &Nset, unsigned int 
 
 }
 
-void write_jij(map<uint64_t, double> jij) {
+void write_jij(map<uint64_t, double> &jij) {
 
 	map<uint64_t, double>::iterator it;
 
@@ -162,11 +162,11 @@ public:
 	}
 };
 
-map<uint64_t, double> optimize(map<uint64_t, double> pdata) {
+map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
 
 	LBFGSParam<double> param;
 	param.epsilon = 1e-4;
-	param.max_iterations = 200;
+	param.max_iterations = 1000;
 
 	LBFGSSolver<double> solver(param);
 
