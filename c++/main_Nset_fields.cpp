@@ -114,6 +114,7 @@ class rise_obj_func {
 private:
 	map<uint64_t, double> pdata;
 	unsigned int node;
+	
 public:
 	rise_obj_func(map<uint64_t, double> pdata_, unsigned int node_) : pdata(pdata_), node(node_) {}
 
@@ -164,17 +165,12 @@ public:
 			sn += exp(-energy) * p;
 
 			for (int j = 0; j < n; j++) {
-
 				grad[j] += (-eval_ops[j] * exp(-energy)) * p;
 			}
 		}
 
-
-
 		return sn;
-
 	}
-
 };
 
 map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
@@ -211,7 +207,6 @@ map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
 			cout << op << ": " << g[j] << endl;
 
 			jij[op] += g[j] / order;
-
 			
 		}
 	}
