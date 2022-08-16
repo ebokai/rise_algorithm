@@ -168,7 +168,6 @@ map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
 	uint64_t op;
 	double order;
 
-
 	for (int node = 0; node < n; node++) {
 		rise_obj_func rise(pdata, node);
 		VectorXd g = VectorXd::Zero(n);
