@@ -78,18 +78,14 @@ map<uint64_t, double> get_pdata(map<uint64_t, unsigned int> &Nset, unsigned int 
 	map<uint64_t, unsigned int>::iterator it;
 
 	for (it = Nset.begin(); it != Nset.end(); it++) {
-
 		pdata[it->first] = it->second / (double) N;
-
 	}
 
 	return pdata;
-
 }
 
 // ===== WRITE COUPLINGS =====
 void write_jij(map<uint64_t, double> &jij) {
-
 	map<uint64_t, double>::iterator it;
 
 	ofstream myfile;
@@ -99,13 +95,10 @@ void write_jij(map<uint64_t, double> &jij) {
 	myfile.open(oname);
 
 	for (it = jij.begin(); it != jij.end(); it++) {
-
 		myfile << bitset<n>(it->first) << "\t" << it->second << "\n";
-
 	}
 
 	myfile.close();
-
 }
 
 
@@ -114,12 +107,11 @@ class rise_obj_func {
 private:
 	map<uint64_t, double> pdata;
 	unsigned int node;
-	
+
 public:
 	rise_obj_func(map<uint64_t, double> pdata_, unsigned int node_) : pdata(pdata_), node(node_) {}
 
 	double operator()(const VectorXd &x, VectorXd &grad) {
-
 		double sn = 0;
 		double energy, p;
 
@@ -139,14 +131,12 @@ public:
 		}
 
 		for (it = pdata.begin(); it != pdata.end(); it++) {
-
 			state = it->first;
 			p = it->second;
 
 			energy = 0;
 
 			for (int j = 0; j < n; j++) {
-
 				if (j == node) {
 					op = pow(2,node); // local field
 				} else {
@@ -206,8 +196,7 @@ map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
 
 			cout << op << ": " << g[j] << endl;
 
-			jij[op] += g[j] / order;
-			
+			jij[op] += g[j] / order;	
 		}
 	}
 
