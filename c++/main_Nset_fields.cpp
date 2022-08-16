@@ -24,7 +24,6 @@ void write_jij(map<uint64_t, double> &jij);
 
 // ===== MAIN FUNCTION =====
 int main() { 
-
 	unsigned int N = 0;
 
 	map<uint64_t, unsigned int> Nset = read_data(N);
@@ -36,13 +35,11 @@ int main() {
 	write_jij(jij);
 
 	return 0;
-
 }
 
 // ===== READ DATAFILE =====
 // specify filename at top of script
 map<uint64_t, unsigned int> read_data(unsigned int &N) {
-
 	string line, subline;
 	uint64_t state;
 
@@ -54,7 +51,6 @@ map<uint64_t, unsigned int> read_data(unsigned int &N) {
 	ifstream myfile(fname);
 
 	while(getline(myfile, line)) {
-
 		subline = line.substr(0,n);
 		// state = bitset<n>(subline).to_ulong();
 
@@ -68,12 +64,10 @@ map<uint64_t, unsigned int> read_data(unsigned int &N) {
 	myfile.close();
 
 	return Nset;
-
 }
 
 // ===== EMPIRICAL DISTRIBUTION =====
 map<uint64_t, double> get_pdata(map<uint64_t, unsigned int> &Nset, unsigned int &N) {
-
 	map<uint64_t, double> pdata;
 	map<uint64_t, unsigned int>::iterator it;
 
