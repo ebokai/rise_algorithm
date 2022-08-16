@@ -178,7 +178,6 @@ public:
 };
 
 map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
-
 	LBFGSParam<double> param;
 	param.epsilon = 1e-4;
 	param.max_iterations = 1000;
@@ -191,7 +190,6 @@ map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
 
 
 	for (int node = 0; node < n; node++) {
-
 		rise_obj_func rise(pdata, node);
 		VectorXd g = VectorXd::Zero(n);
 		double min_f;
@@ -201,8 +199,7 @@ map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
 		cout << "f: " << min_f << "\t";
 		cout << "iterations: " << niter << endl;
 
-		for (int j = 0; j < n; j++) {
-			
+		for (int j = 0; j < n; j++) {			
 			if (node != j) {
 				op = pow(2,node) + pow(2,j);
 				order = 2;	
@@ -216,11 +213,8 @@ map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
 			jij[op] += g[j] / order;
 
 			
-
 		}
-
 	}
 
 	return jij;
-
 }
