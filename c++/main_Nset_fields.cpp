@@ -13,8 +13,8 @@ using namespace std;
 using namespace Eigen;
 using namespace LBFGSpp;
 
-const int n = 9;
-const string fname = "../data/test_data_n9_N895.dat";
+const int n = 16;
+const string fname = "../data/20190828_binsec1.dat";
 
 // ===== FUNCTION DECLARATIONS =====
 map<uint64_t, unsigned int> read_data(unsigned int &N);
