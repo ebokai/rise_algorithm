@@ -3,7 +3,7 @@
 #include <fstream>
 #include <map>
 #include <bitset>
-#include <sstream>
+//#include <sstream>
 
 using namespace std;
 
@@ -15,7 +15,9 @@ using namespace LBFGSpp;
 
 const int n = 60;
 const unsigned int N = 1000000;
-stringstream fname_base;
+
+const string fname = "../data/test_data_n60_N1000000";
+//stringstream fname_base;
 
 // function declarations
 map<uint64_t, unsigned int> read_data();
@@ -25,7 +27,7 @@ void write_jij(map<uint64_t, double> &jij);
 
 int main() {
 
-	fname_base << "../data/test_data_n" << n << "_N" << N;
+	//fname_base << "../data/test_data_n" << n << "_N" << N;
 
 	map<uint64_t, unsigned int> Nset = read_data();
 	map<uint64_t, double> pdata = get_pdata(Nset, N);
@@ -45,10 +47,12 @@ map<uint64_t, unsigned int> read_data() {
 
 	map<uint64_t, unsigned int> Nset;
 
-	string fname = fname_base.str() + ".dat";
+	//string fname = fname_base.str() + ".dat";
+
+	string fname_full = fname + ".dat";
 
 	cout << fname << endl;
-	ifstream myfile(fname);
+	ifstream myfile(fname_full);
 
 	while (getline(myfile, line)) {
 
@@ -84,9 +88,9 @@ void write_jij(map<uint64_t, double> &jij) {
 
 	ofstream myfile;
 
-	string fname = fname_base.str() + "_jij_fit.dat";
+	string fname_full = fname + "_jij_fit.dat";
 
-	myfile.open(fname);
+	myfile.open(fname_full);
 
 	for (it = jij.begin(); it != jij.end(); it++) {
 
