@@ -13,7 +13,7 @@ using namespace std;
 using namespace Eigen;
 using namespace LBFGSpp;
 
-const unsigned int n = 60;
+const int n = 60;
 const unsigned int N = 1000000;
 stringstream fname_base;
 
@@ -186,7 +186,7 @@ map<uint64_t, double> optimize(map<uint64_t, double> &pdata) {
 		cout << "iterations: " << niter << endl;
 
 		for (int j = 0; j < n; j++) {
-			uint64_t op = pow(2,node) + pow(2,j);
+			op = pow(2,node) + pow(2,j);
 			if (node != j) {
 				jij[op] = g[j];
 			}
